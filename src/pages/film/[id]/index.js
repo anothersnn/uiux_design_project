@@ -1,13 +1,17 @@
+// index.js
 import FilmInfo from '@/components/FilmInfo';
+import Layout from '@/components/Layout';
 import { useRouter } from 'next/router';
 
-
 function Movie() {
-    const router = useRouter();
-    const { id } = router.query;
+  const router = useRouter();
+  const { id } = router.query;
 
-    return (
-        <FilmInfo id={id}></FilmInfo>
-    )
+  return (
+    <Layout>
+      <FilmInfo id={id} />
+    </Layout>
+  );
 }
-export default Movie
+
+export default Movie;

@@ -1,18 +1,24 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const getRatingColor = (rating) => {
+const getRatingColorStyles = (rating) => {
+  let colorClass;
   if (rating >= 7.5) {
-    return 'text-green-500';
+    colorClass = 'text-green-500';
   } else if (rating >= 5) {
-    return 'text-yellow-400';
+    colorClass = 'text-yellow-400';
   } else {
-    return 'text-red-600';
+    colorClass = 'text-red-600';
   }
+
+  return {
+    ratingColorClass: colorClass
+  };
 };
 
 const FilmCard = ({ film }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { ratingColorClass } = getRatingColorStyles(film.rating);
 
   return (
     <Link href={`/film/${film.id}`}>
@@ -27,7 +33,7 @@ const FilmCard = ({ film }) => {
           alt={film.title}
         />
         <div
-          className={`px-6 py-2 absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
+          className={`px-6 py-2 absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 transition-opacity duration-300 ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -35,9 +41,7 @@ const FilmCard = ({ film }) => {
             {film.title}
           </div>
           <p
-            className={`text-white text-sm mb-1 ${getRatingColor(
-              film.rating
-            )}`}
+            className={`text-white text-sm mb-1 ${ratingColorClass}`}
           >
             Rating: {film.rating}
           </p>

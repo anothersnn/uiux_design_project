@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Comments from './Comments';
+import Navbar from './Navbar';
 
-const getRatingColor = (rating) => {
+const getRatingColorStyles = (rating) => {
+    let colorClass;
     if (rating >= 7.5) {
-        return 'text-green-400'; 
+        colorClass = 'text-green-500'; 
     } else if (rating >= 6) {
-        return 'text-yellow-400'; 
+        colorClass = 'text-yellow-500'; 
     } else {
-        return 'text-red-400'; 
+        colorClass = 'text-red-500'; 
     }
+    return colorClass;
 };
 
 const FilmInfo = ({id}) => {
@@ -46,7 +49,7 @@ const FilmInfo = ({id}) => {
                     <div className="text-gray-100 font-bold xs:text-md sm:text-xl md:text-3xl">
                         {film.title} ({film.year})
                     </div>
-                    <div className={`xs:text-sm smtext-xl md:text-2xl font-bold mb-1 md:mt-3 ${getRatingColor(film.rating)}`}>
+                    <div className={`xs:text-sm smtext-xl md:text-2xl font-bold mb-1 md:mt-3 ${getRatingColorStyles(film.rating)}`}>
                         <p>Rating: {film.rating}</p>
                     </div>
                     <div className="hidden md:block text-gray-200 font-bold xs:text-xs sm:text-xs md:text-base mb-1 md:mt-3">
@@ -81,4 +84,4 @@ const FilmInfo = ({id}) => {
     );
 };
 
-export default FilmInfo
+export default FilmInfo;

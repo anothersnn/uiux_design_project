@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Films from '@/components/Films';
-import Pagination from '@/components/Pagination'; // Импортируем компонент Pagination
+import Pagination from '@/components/Pagination';
+import Navbar from '@/components/Navbar'; // Импортируем компонент Navbar
 
 function FilmsPage() {
   const [films, setFilms] = useState([]);
@@ -36,17 +37,12 @@ function FilmsPage() {
 
   return (
     <div>
-      <form onSubmit={handleSearchSubmit} className="mt-4 lg:mt-8">
-        <div className="flex justify-center items-center">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Search movies..."
-            className="xs:p-1 sm:p-2 border-2 rounded"
-          />
-        </div>
-      </form>
+      {/* Navbar с поиском */}
+      <Navbar
+        handleSearchChange={handleSearchChange}
+        handleSearchSubmit={handleSearchSubmit}
+        searchQuery={searchQuery}
+      />
 
       {/* Фильмы */}
       <Films films={films} />
